@@ -56,8 +56,27 @@
   .pill{background:var(--white);border:1.5px solid var(--cream-dark);border-radius:999px;padding:8px 18px;font-weight:600;font-size:.92rem}
   .pill span{margin-right:6px}
 
-  section{padding:72px 0}
-  .kicker{text-transform:uppercase;letter-spacing:.12em;font-weight:700;font-size:.8rem;color:var(--terracotta);margin-bottom:12px}
+  section{padding:118px 0;scroll-margin-top:84px}
+  #top{scroll-margin-top:84px}
+  section + section{border-top:none}
+
+  /* Scroll reveal + section motion */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s cubic-bezier(.16,.84,.44,1),transform .7s cubic-bezier(.16,.84,.44,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  /* Full-bleed white bands to separate alternating sections */
+  .fullbleed{position:relative}
+  .fullbleed::before{content:"";position:absolute;inset:0;left:50%;width:100vw;transform:translateX(-50%);background:var(--white);z-index:0;box-shadow:0 1px 0 rgba(0,29,61,.06),0 -1px 0 rgba(0,29,61,.06)}
+  .fullbleed > *{position:relative;z-index:1}
+
+  /* Inset panels (same boundary as the pilot-results card) */
+  .panel{background:var(--white);border-radius:var(--radius);padding:56px 48px}
+  .panel .step{background:var(--white);border:1px solid var(--cream-dark);box-shadow:0 4px 16px rgba(0,29,61,.05)}
+  .panel-navy{background:radial-gradient(120% 150% at 50% 0%,#0a3a6e 0%,#001d3d 62%,#00132b 100%);border-radius:var(--radius);padding:48px 48px 40px}
+  .about,.panel,.results,.panel-navy,.contact{box-shadow:0 22px 58px rgba(0,29,61,.1)}
+  .kicker{display:inline-flex;align-items:center;gap:11px;text-transform:uppercase;letter-spacing:.14em;font-weight:700;font-size:.85rem;color:var(--terracotta);margin-bottom:18px}
+  .kicker::before{content:"";width:30px;height:3px;border-radius:2px;background:var(--mustard)}
   h2{font-size:clamp(1.7rem,3.5vw,2.4rem);margin-bottom:18px}
   .lead{font-size:1.08rem;color:#4a5670;max-width:720px}
 
@@ -67,20 +86,30 @@
   .factbox{background:var(--cream);border-radius:var(--radius);padding:28px}
   .factbox h3{font-size:1.05rem;margin-bottom:10px;color:var(--terracotta)}
   .factbox p{font-size:.98rem}
+  .factbox ul{list-style:none;margin:0}
+  .factbox li{font-size:.98rem;padding:7px 0 7px 26px;position:relative;border-top:1px solid var(--cream-dark)}
+  .factbox li:first-child{border-top:none}
+  .factbox li::before{content:"";position:absolute;left:4px;top:15px;width:8px;height:8px;border-radius:2px;background:var(--mustard)}
   .factbox + .factbox{margin-top:16px}
 
   /* Theory of change */
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:36px}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:46px}
   .step{background:var(--white);border-radius:var(--radius);padding:30px 26px;position:relative}
   .step .num{font-family:'Source Serif 4',serif;font-size:2.6rem;font-weight:700;color:var(--mustard);line-height:1;margin-bottom:14px}
   .step h3{font-size:1.15rem;margin-bottom:8px}
   .step p{font-size:.95rem;color:#4a5670}
+  .step{transition:transform .35s cubic-bezier(.16,.84,.44,1),box-shadow .35s ease}
+  .step:hover{transform:translateY(-8px);box-shadow:0 20px 44px rgba(0,29,61,.13)}
+  .step:hover .num{color:var(--terracotta)}
+  .step .num{transition:color .3s ease}
 
   /* Offer */
-  .offer-list{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:36px}
+  .offer-list{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:46px}
   .offer{background:var(--white);border-radius:var(--radius);padding:28px;border-top:6px solid var(--sage)}
   .offer h3{font-size:1.1rem;margin-bottom:8px}
   .offer p{font-size:.95rem;color:#4a5670}
+  .offer{transition:transform .35s cubic-bezier(.16,.84,.44,1),box-shadow .35s ease,border-top-color .3s ease}
+  .offer:hover{transform:translateY(-8px);box-shadow:0 20px 44px rgba(0,29,61,.13);border-top-color:var(--mustard)}
   .free-banner{margin-top:36px;background:var(--sage);color:#fff;border-radius:var(--radius);padding:30px 34px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
   .free-banner strong{font-family:'Source Serif 4',serif;font-size:1.3rem}
   .free-banner ul{list-style:none;display:flex;gap:22px;flex-wrap:wrap}
@@ -94,10 +123,22 @@
   .stat{background:rgba(255,255,255,.07);border-radius:18px;padding:22px 16px;text-align:center}
   .stat .n{font-family:'Source Serif 4',serif;font-size:2.1rem;font-weight:700;color:var(--mustard)}
   .stat .l{font-size:.85rem;color:#c8cede;margin-top:4px}
+  .stat{transition:transform .35s cubic-bezier(.16,.84,.44,1),background .3s ease}
+  .stat:hover{transform:translateY(-5px);background:rgba(255,255,255,.14)}
   .findings{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .finding{background:rgba(255,255,255,.07);border-radius:18px;padding:20px 22px;display:flex;gap:16px;align-items:baseline}
   .finding .pct{font-family:'Source Serif 4',serif;font-size:1.6rem;font-weight:700;color:var(--mustard);min-width:86px}
   .finding p{font-size:.93rem;color:#dde1ec}
+  .finding{transition:transform .35s cubic-bezier(.16,.84,.44,1),background .3s ease}
+  .finding:hover{transform:translateY(-4px);background:rgba(255,255,255,.13)}
+
+  /* Photo gallery */
+  .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:44px}
+  .photo{position:relative;overflow:hidden;border-radius:var(--radius);aspect-ratio:3/2;box-shadow:0 10px 30px rgba(0,29,61,.12);margin:0}
+  .photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.16,.84,.44,1)}
+  .photo:hover img{transform:scale(1.07)}
+  .photo figcaption{position:absolute;left:0;right:0;bottom:0;padding:34px 20px 16px;color:#fff;font-weight:600;font-size:.95rem;background:linear-gradient(transparent,rgba(0,29,61,.82));transform:translateY(6px);opacity:.92;transition:transform .4s ease,opacity .4s ease}
+  .photo:hover figcaption{transform:none;opacity:1}
   .avg-score{text-align:center;margin:34px 0 8px}
   .avg-score .big{font-family:'Source Serif 4',serif;font-size:3rem;font-weight:700;color:var(--mustard)}
   .report-cta{text-align:center;margin-top:30px}
@@ -105,6 +146,42 @@
 
   /* Speakers & News placeholders */
   .placeholder-card{background:var(--white);border:2px dashed var(--cream-dark);border-radius:var(--radius);padding:40px;text-align:center;color:#8a93a8;margin-top:30px}
+
+  /* Speaker rotating carousel */
+  .spk-stage{margin-top:30px;overflow:hidden;position:relative;-webkit-mask:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%);mask:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%)}
+  .spk-track{display:flex;width:max-content;padding:14px 0 4px;animation:spkmarquee 24s linear infinite}
+  .spk-stage:hover .spk-track{animation-play-state:paused}
+  @keyframes spkmarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .spk-card{flex:0 0 auto;width:190px;height:190px;margin-right:26px;position:relative;cursor:pointer;border:3px solid rgba(255,182,37,.35);padding:0;background:none;border-radius:18px;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.42);transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
+  .spk-card:hover{transform:translateY(-7px);box-shadow:0 22px 50px rgba(0,0,0,.58);border-color:var(--mustard)}
+  .spk-card:focus-visible{outline:3px solid var(--mustard);outline-offset:3px}
+  .spk-card img,.spk-proxy{width:100%;height:100%;object-fit:cover;display:block}
+  .spk-proxy{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 34%,#0a4d8c,#001d3d);font-family:'Source Serif 4',serif;font-size:3.6rem;font-weight:700;color:var(--mustard)}
+  .spk-label{position:absolute;left:0;right:0;bottom:0;padding:22px 11px 9px;background:linear-gradient(transparent,rgba(0,29,61,.92));text-align:left}
+  .spk-label b{font-family:'Source Serif 4',serif;font-size:.88rem;color:#fff;display:block;line-height:1.2}
+  .spk-label span{font-size:.66rem;color:var(--mustard);font-weight:600}
+  .spk-hint{text-align:center;color:#8a93a8;font-size:.86rem;margin-top:14px}
+
+  /* Speaker modal */
+  .spk-modal{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:22px;background:rgba(0,10,25,.72);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .3s ease}
+  .spk-modal.open{opacity:1;pointer-events:auto}
+  .spk-modal-inner{background:var(--white);border-radius:var(--radius);max-width:860px;width:100%;max-height:88vh;overflow:auto;display:grid;grid-template-columns:310px 1fr;transform:translateY(18px) scale(.98);transition:transform .35s cubic-bezier(.16,.84,.44,1)}
+  .spk-modal.open .spk-modal-inner{transform:none}
+  .spk-modal-media{min-height:360px}
+  .spk-modal-media img,.spk-modal-media .spk-proxy{width:100%;height:100%;object-fit:cover;min-height:360px}
+  .spk-modal-media .spk-proxy{font-size:6rem}
+  .spk-modal-body{padding:40px 42px;position:relative}
+  .spk-modal-body h3{font-size:1.75rem;margin-bottom:4px}
+  .spk-modal-role{color:var(--terracotta);font-weight:600;font-size:.95rem;margin-bottom:20px}
+  .spk-modal-body p{color:#4a5670;font-size:1rem;margin-bottom:14px}
+  .spk-close{position:absolute;top:14px;right:16px;background:var(--cream);border:none;width:40px;height:40px;border-radius:50%;font-size:1.5rem;line-height:1;cursor:pointer;color:var(--ink)}
+  .spk-close:hover{background:var(--cream-dark)}
+  @media (prefers-reduced-motion:reduce){.spk-track{animation:none}}
+
+  /* Navy stage for the speakers band */
+  #speakers .kicker{color:var(--mustard)}
+  #speakers h2{color:var(--cream)}
+  #speakers .lead{color:#c8cede}
 
   /* Contact */
   .contact{background:var(--terracotta);color:#fff;border-radius:var(--radius);text-align:center}
@@ -122,6 +199,9 @@
     .about-grid{grid-template-columns:1fr}
     .stat-grid{grid-template-columns:repeat(2,1fr)}
     .findings{grid-template-columns:1fr}
+    .gallery{grid-template-columns:1fr}
+    .spk-modal-inner{grid-template-columns:1fr}
+    .spk-modal-media,.spk-modal-media img,.spk-modal-media .spk-proxy{min-height:240px}
     nav ul{display:none;position:absolute;top:100%;left:0;right:0;background:var(--cream);flex-direction:column;padding:20px;border-bottom:1px solid var(--cream-dark)}
     nav ul.open{display:flex}
     .menu-toggle{display:block}
@@ -159,7 +239,7 @@
   <!-- HERO -->
   <div class="hero wrap">
     <h1>Unforgettable moments to learn about <em>democracy</em> and <em>freedom</em></h1>
-    <p class="tagline">Project Civic Square brings real stories into UK classrooms — helping students understand their power, their rights, and why democracy is worth defending.</p>
+    <p class="tagline">Project Civic Square brings individuals who fled authoritarian countries and their stories into UK classrooms — helping students understand their power, their rights, and why democracy is worth defending.</p>
     <div class="pills">
       <span class="pill"><span>📖</span>Stories-first</span>
       <span class="pill"><span>🙋</span>Interactive</span>
@@ -175,11 +255,11 @@
     <div class="about" style="padding:56px 48px">
       <div class="about-grid">
         <div>
-          <div class="kicker">About the project</div>
-          <h2>Why Civic Square exists</h2>
+          <h2>Our mission</h2>
           <p class="lead" style="margin-bottom:18px">Project Civic Square was founded in 2025 to tackle one of the biggest problems in British society: young people feeling disillusioned with democracy.</p>
-          <p style="color:#4a5670;margin-bottom:18px">Compared with older generations, young people are more likely to prefer unelected leaders to democracy, and more dissatisfied with the state of democracy itself.</p>
-          <p style="color:#4a5670">We use proven strategies to help young people reflect and engage with ideas on British Values, democracy, freedoms, the rule of law, and authoritarianism.</p>
+          <p style="color:#4a5670;margin-bottom:18px">Young people are more <a href="https://www.ukonward.com/wp-content/uploads/2022/09/kids-arent-alright-democracy.pdf" target="_blank" rel="noopener">detached from democratic and social norms</a> and are more <a href="https://bennettschool.cam.ac.uk/wp-content/uploads/2022/06/Youth_and_Satisfaction_with_Democracy-lite.pdf" target="_blank" rel="noopener">dissatisfied with the state of democracy</a>.</p>
+          <p style="color:#4a5670;margin-bottom:18px">We are a group of passionate educators, in partnership with local charities, that bring the best form of democracy education to young Britons, free of charge. Civic Square connects schools with trained speakers who share powerful, real-world experiences with students.</p>
+          <p style="color:#4a5670">We work with secondary schools across the UK, providing resources and speakers that align with teachers' needs and the National Curriculum.</p>
         </div>
         <div>
           <div class="factbox">
@@ -188,7 +268,11 @@
           </div>
           <div class="factbox">
             <h3>Our theory of change</h3>
-            <p>Make democracy education enjoyable for teachers. Inspire students through impactful testimonies. Build youth participation and democratic resilience.</p>
+            <ul>
+              <li>Make democracy education enjoyable for teachers.</li>
+              <li>Inspire students through impactful testimonies.</li>
+              <li>Build youth participation and democratic resilience.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -196,24 +280,26 @@
   </section>
 
   <!-- THEORY OF CHANGE -->
-  <section class="wrap" style="padding-top:0">
-    <div class="kicker">How change happens</div>
-    <h2>Three steps to democratic resilience</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="num">01</div>
-        <h3>Enjoyable for teachers</h3>
-        <p>We make democracy education something teachers look forward to — not another burden on their timetable.</p>
-      </div>
-      <div class="step">
-        <div class="num">02</div>
-        <h3>Inspiring for students</h3>
-        <p>Impactful, first-hand testimonies bring democracy and freedom to life in ways textbooks cannot.</p>
-      </div>
-      <div class="step">
-        <div class="num">03</div>
-        <h3>Lasting for society</h3>
-        <p>We build youth participation and democratic resilience that outlasts a single lesson.</p>
+  <section class="wrap">
+    <div class="panel">
+      <div class="kicker">How change happens</div>
+      <h2>Three steps to democratic resilience</h2>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="num">01</div>
+          <h3>Enjoyable for teachers</h3>
+          <p>We make democracy education something teachers look forward to — not another burden on their timetable.</p>
+        </div>
+        <div class="step reveal">
+          <div class="num">02</div>
+          <h3>Inspiring for students</h3>
+          <p>Impactful, first-hand testimonies bring democracy and freedom to life in ways textbooks cannot.</p>
+        </div>
+        <div class="step reveal">
+          <div class="num">03</div>
+          <h3>Lasting for society</h3>
+          <p>We build youth participation and democratic resilience that outlasts a single lesson.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -224,15 +310,15 @@
     <h2>Powerful sessions, minimal workload</h2>
     <p class="lead">Once your school files an application, we arrange the visit with you — and handle most of the logistics.</p>
     <div class="offer-list">
-      <div class="offer">
+      <div class="offer reveal">
         <h3>🕐 Flexible formats</h3>
         <p>45–60 minute classroom sessions or whole-school assemblies — whatever fits your timetable.</p>
       </div>
-      <div class="offer">
+      <div class="offer reveal">
         <h3>📚 Curriculum-aligned</h3>
         <p>Topics that align with Citizenship &amp; PSHE, Politics &amp; Global Studies, and other subjects.</p>
       </div>
-      <div class="offer">
+      <div class="offer reveal">
         <h3>🤝 We do the heavy lifting</h3>
         <p>Minimal workload for teachers — we handle most of the logistics from application to visit.</p>
       </div>
@@ -279,12 +365,62 @@
     </div>
   </section>
 
+  <!-- SESSIONS GALLERY -->
+  <section id="gallery" class="wrap">
+    <div class="kicker">In schools this term</div>
+    <h2>Moments from our sessions</h2>
+    <p class="lead">Real stories of democracy and freedom, brought into classrooms and assembly halls across the country.</p>
+    <div class="gallery">
+      <figure class="photo reveal">
+        <img src="photos/session-ark-elvin.jpg" alt="A speaker addresses students in a school assembly hall" loading="lazy">
+      </figure>
+      <figure class="photo reveal">
+        <img src="photos/session-chesham.jpg" alt="A speaker shares their testimony with students" loading="lazy">
+      </figure>
+      <figure class="photo reveal">
+        <img src="photos/session-ark-walworth.jpg" alt="Students listen during a classroom session" loading="lazy">
+      </figure>
+      <figure class="photo reveal">
+        <img src="photos/session-wren.jpg" alt="A speaker presents to students in a school hall" loading="lazy">
+      </figure>
+    </div>
+  </section>
+
   <!-- SPEAKERS -->
-  <section id="speakers" class="wrap" style="padding-top:0">
-    <div class="kicker">Speaker highlights</div>
-    <h2>The voices behind the sessions</h2>
-    <p class="lead">Our trained speakers share first-hand testimonies of life with and without democratic freedoms.</p>
-    <div class="placeholder-card">Speaker profiles coming soon.</div>
+  <section id="speakers" class="wrap">
+    <div class="panel-navy">
+      <div class="kicker">Speaker highlights</div>
+      <h2>The voices behind the sessions</h2>
+      <p class="lead">Our trained speakers share first-hand testimonies of life without freedoms. Click to read their profiles. The list is not exhaustive.</p>
+      <div class="spk-stage">
+        <div class="spk-track">
+          <button class="spk-card" data-spk="nathan">
+            <img src="photos/speaker-nathan.jpg" alt="Nathan Law" style="object-position:50% 22%" loading="lazy">
+            <span class="spk-label"><b>Nathan Law</b><span>Hong Kong Democracy Activist</span></span>
+          </button>
+          <button class="spk-card" data-spk="jihyun">
+            <img src="photos/speaker-jihyun.jpg" alt="Jihyun Park" style="object-position:50% 38%" loading="lazy">
+            <span class="spk-label"><b>Jihyun Park</b><span>North Korean escapee &amp; activist</span></span>
+          </button>
+          <button class="spk-card" data-spk="sai">
+            <span class="spk-proxy">S</span>
+            <span class="spk-label"><b>Sai</b><span>Shan artist &amp; defender, Myanmar</span></span>
+          </button>
+          <button class="spk-card" data-spk="nathan" aria-hidden="true" tabindex="-1">
+            <img src="photos/speaker-nathan.jpg" alt="" style="object-position:50% 22%" loading="lazy">
+            <span class="spk-label"><b>Nathan Law</b><span>Hong Kong Democracy Activist</span></span>
+          </button>
+          <button class="spk-card" data-spk="jihyun" aria-hidden="true" tabindex="-1">
+            <img src="photos/speaker-jihyun.jpg" alt="" style="object-position:50% 38%" loading="lazy">
+            <span class="spk-label"><b>Jihyun Park</b><span>North Korean escapee &amp; activist</span></span>
+          </button>
+          <button class="spk-card" data-spk="sai" aria-hidden="true" tabindex="-1">
+            <span class="spk-proxy">S</span>
+            <span class="spk-label"><b>Sai</b><span>Shan artist &amp; defender, Myanmar</span></span>
+          </button>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- CONTACT -->
@@ -293,16 +429,112 @@
       <div class="kicker" style="color:#FFB625">Get involved</div>
       <h2>Bring Civic Square to your school</h2>
       <p class="lead">Whether you'd like to request a session, support the project, or simply learn more about the programme — we'd love to hear from you. Participation is completely free.</p>
-      <a class="btn" href="/cdn-cgi/l/email-protection#cfaca6b9a6acbcbebaaebdaabaa48fa8a2aea6a3e1aca0a2f0bcbaada5aaacbbf28ca6b9a6aceafdff9cbebaaebdaaeafdffaaa1bebaa6bdb6">Email us</a>
-      <p class="email">or write to <a href="/cdn-cgi/l/email-protection#3c5f554a555f4f4d495d4e5949577c5b515d5550125f5351"><span class="__cf_email__" data-cfemail="22414b544b41515357435047574962454f434b4e0c414d4f">[email&#160;protected]</span></a></p>
+      <a class="btn" href="https://forms.gle/NrVBYdWLmAVZ1D26A" target="_blank" rel="noopener">Request a session</a>
+      <p class="email">or write to <a href="mailto:civicsquareuk@gmail.com">civicsquareuk@gmail.com</a></p>
     </div>
   </section>
 
+  <!-- SPEAKER MODAL -->
+  <div class="spk-modal" id="spkModal" role="dialog" aria-modal="true" aria-labelledby="spkName">
+    <div class="spk-modal-inner">
+      <div class="spk-modal-media" id="spkMedia"></div>
+      <div class="spk-modal-body">
+        <button class="spk-close" id="spkClose" aria-label="Close">×</button>
+        <h3 id="spkName"></h3>
+        <div class="spk-modal-role" id="spkRole"></div>
+        <div id="spkBio"></div>
+      </div>
+    </div>
+  </div>
+
 </main>
+
+<script>
+  var SPEAKERS = {
+    nathan: {
+      name: 'Nathan Law',
+      role: 'Hong Kong Democracy Activist',
+      photo: 'photos/speaker-nathan.jpg',
+      pos: '50% 22%',
+      bio: [
+        'Nathan Law is a Hong Kong exile activist based in the UK. He was elected as the youngest legislator of Hong Kong, and continued to speak up for the democratic rights of Hong Kong after he went into exile in 2020.',
+        'Named to TIME\u2019s 100 Most Influential People and nominated for the Nobel Peace Prize, he is also the author of \u201cFreedom: How We Lose It and How We Fight Back\u201d.'
+      ]
+    },
+    jihyun: {
+      name: 'Jihyun Park',
+      role: 'North Korean escapee & human rights activist',
+      photo: 'photos/speaker-jihyun.jpg',
+      pos: '50% 38%',
+      bio: [
+        'Jihyun Park is a British-Korean human rights activist and writer, renowned for being among the first North Korean refugees to stand for public office in the UK. Born in Chongjin, North Korea, Park endured severe poverty, famine, and state oppression. After escaping North Korea twice \u2014 first being repatriated and imprisoned, then successfully reaching the UK in 2008 \u2014 she became a British citizen.',
+        'She is recognised with awards such as the Amnesty Brave Award and the Times Heroes Award, and she continues to speak out internationally to raise awareness about the regime\u2019s atrocities and advocate for refugees.'
+      ]
+    },
+    sai: {
+      name: 'Sai',
+      role: 'Shan artist, curator & human rights defender, Myanmar',
+      proxy: 'S',
+      bio: [
+        'Sai is a Shan ethnic minority artist, curator, and human rights defender from Myanmar, now serving on the Leadership Council of the World Liberty Congress. He co-founded the Myanmar Peace Museum, the first institution in Myanmar\u2019s history dedicated to memorialization and the counter-archiving of evidence of war crimes and resistance.',
+        'His work, censored by multiple regimes, confronts state violence and transnational repression through art and testimony. Since the February 2021 coup, Sai has fought relentlessly for recognition of his father\u2019s case after years of silence from international actors; the UN Working Group on Arbitrary Detention ultimately ruled his imprisonment as arbitrary.',
+        'A nominee for the Index on Censorship Freedom of Expression Award, Sai\u2019s work connects memory, justice, and global solidarity.'
+      ]
+    }
+  };
+
+  (function(){
+    var modal = document.getElementById('spkModal');
+    var media = document.getElementById('spkMedia');
+    var nameEl = document.getElementById('spkName');
+    var roleEl = document.getElementById('spkRole');
+    var bioEl = document.getElementById('spkBio');
+    var lastFocus = null;
+
+    function open(key){
+      var s = SPEAKERS[key];
+      if (!s) return;
+      lastFocus = document.activeElement;
+      media.innerHTML = s.photo
+        ? '<img src="' + s.photo + '" alt="' + s.name + '" style="object-position:' + (s.pos||'50% 30%') + '">'
+        : '<div class="spk-proxy">' + s.proxy + '</div>';
+      nameEl.textContent = s.name;
+      roleEl.textContent = s.role;
+      bioEl.innerHTML = s.bio.map(function(p){ return '<p>' + p + '</p>'; }).join('');
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('spkClose').focus();
+    }
+    function close(){
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+      if (lastFocus) lastFocus.focus();
+    }
+    document.querySelectorAll('.spk-card').forEach(function(c){
+      c.addEventListener('click', function(){ open(c.getAttribute('data-spk')); });
+    });
+    document.getElementById('spkClose').addEventListener('click', close);
+    modal.addEventListener('click', function(e){ if (e.target === modal) close(); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
+  })();
+</script>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) { els.forEach(function(e){e.classList.add('in');}); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.15 });
+    els.forEach(function(e, i){ e.style.transitionDelay = (i % 3) * 90 + 'ms'; io.observe(e); });
+  })();
+</script>
 
 <footer class="wrap">
   © 2026 Project Civic Square · civicsquareuk.com
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</body>
 </html>
