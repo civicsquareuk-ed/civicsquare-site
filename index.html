@@ -77,8 +77,14 @@
   .about,.panel,.results,.panel-navy,.contact{box-shadow:0 22px 58px rgba(0,29,61,.1)}
   .kicker{display:inline-flex;align-items:center;gap:11px;text-transform:uppercase;letter-spacing:.14em;font-weight:700;font-size:.85rem;color:var(--terracotta);margin-bottom:18px}
   .kicker::before{content:"";width:30px;height:3px;border-radius:2px;background:var(--mustard)}
+
+  /* Centered section headers */
+  .sec-center > .kicker{display:flex;justify-content:center}
+  .sec-center > h2{text-align:center}
+  .sec-center > .lead{text-align:center;max-width:760px;margin-left:auto;margin-right:auto;text-wrap:balance}
   h2{font-size:clamp(1.7rem,3.5vw,2.4rem);margin-bottom:18px}
-  .lead{font-size:1.08rem;color:#4a5670;max-width:720px}
+  .lead{font-size:1.08rem;color:#4a5670;max-width:720px;text-wrap:pretty}
+  section > .lead,.panel > .lead{max-width:none}
 
   /* About */
   .about{background:var(--white);border-radius:var(--radius)}
@@ -91,6 +97,14 @@
   .factbox li:first-child{border-top:none}
   .factbox li::before{content:"";position:absolute;left:4px;top:15px;width:8px;height:8px;border-radius:2px;background:var(--mustard)}
   .factbox + .factbox{margin-top:16px}
+  .factbox.collapsible{cursor:pointer;transition:box-shadow .3s ease}
+  .factbox.collapsible:hover{box-shadow:0 10px 26px rgba(0,29,61,.08)}
+  .factbox.collapsible .foc-list{margin-top:12px}
+  .factbox.collapsible .foc-list li .d{display:none;color:#4a5670}
+  .factbox.collapsible.open .foc-list li .d{display:inline}
+  .factbox .toggle{display:inline-block;margin-top:12px;font-family:'Inter',sans-serif;font-size:.76rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--terracotta)}
+  .factbox .toggle::after{content:"More detail \2193"}
+  .factbox.collapsible.open .toggle::after{content:"Show less \2191"}
 
   /* Theory of change */
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:46px}
@@ -114,6 +128,26 @@
   .free-banner strong{font-family:'Source Serif 4',serif;font-size:1.3rem}
   .free-banner ul{list-style:none;display:flex;gap:22px;flex-wrap:wrap}
   .free-banner li::before{content:"✓ ";font-weight:700}
+
+  /* Featured offer — highlighted to draw the eye */
+  .offer.featured{border-top-color:var(--mustard);background:linear-gradient(180deg,#FFFCF3 0%,var(--white) 60%);box-shadow:0 0 0 2px var(--mustard),0 14px 32px rgba(0,29,61,.12)}
+  .offer.featured h3 strong{font-weight:800}
+  .offer.featured h3::after{content:"Most asked about";display:inline-block;vertical-align:middle;margin-left:10px;background:var(--mustard);color:var(--ink);font-family:'Inter',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+
+  /* Testimonies */
+  .quotes{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:46px}
+  .quote{background:var(--white);border-radius:var(--radius);padding:26px 30px 22px;border-left:5px solid var(--mustard);box-shadow:0 6px 20px rgba(0,29,61,.06);transition:transform .35s cubic-bezier(.16,.84,.44,1),box-shadow .35s ease;cursor:pointer;align-self:start}
+  .quote:hover{transform:translateY(-4px);box-shadow:0 20px 44px rgba(0,29,61,.12)}
+  .quote .mark{font-family:'Source Serif 4',serif;font-size:2.1rem;line-height:1;color:var(--mustard);margin-bottom:2px}
+  .quote p{font-family:'Source Serif 4',serif;font-size:1.1rem;line-height:1.5;color:var(--ink);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+  .quote.open p{-webkit-line-clamp:unset;overflow:visible}
+  .quote .who{margin-top:14px;font-family:'Inter',sans-serif;font-size:.9rem;font-weight:600;color:var(--terracotta);display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+  .quote .who .src{font-weight:500;color:#4a5670}
+  .quote .who .src b{color:var(--terracotta);font-weight:600}
+  .quote .toggle{flex:none;font-size:.78rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mustard);white-space:nowrap}
+  .quote .toggle::after{content:"Read more"}
+  .quote.open .toggle::after{content:"Show less"}
+  @media (max-width:840px){.quotes{grid-template-columns:1fr}}
 
   /* Pilot results */
   .results{background:var(--ink);color:var(--cream);border-radius:var(--radius)}
@@ -266,56 +300,32 @@
             <h3>The issue is pressing</h3>
             <p>Young people can vote at age 16 — yet schools are not well equipped to help them navigate their new power and rights.</p>
           </div>
-          <div class="factbox">
+          <div class="factbox collapsible" role="button" tabindex="0" aria-expanded="false">
             <h3>Our theory of change</h3>
-            <ul>
-              <li>Make democracy education enjoyable for teachers.</li>
-              <li>Inspire students through impactful testimonies.</li>
-              <li>Build youth participation and democratic resilience.</li>
+            <ul class="foc-list">
+              <li><b>Enjoyable for teachers</b><span class="d"> — democracy education they look forward to, not another burden on the timetable.</span></li>
+              <li><b>Inspiring for students</b><span class="d"> — first-hand testimonies bring democracy and freedom to life in ways textbooks cannot.</span></li>
+              <li><b>Lasting for society</b><span class="d"> — youth participation and resilience that outlast a single lesson.</span></li>
             </ul>
+            <span class="toggle"></span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- THEORY OF CHANGE -->
-  <section class="wrap">
-    <div class="panel">
-      <div class="kicker">How change happens</div>
-      <h2>Three steps to democratic resilience</h2>
-      <div class="steps">
-        <div class="step reveal">
-          <div class="num">01</div>
-          <h3>Enjoyable for teachers</h3>
-          <p>We make democracy education something teachers look forward to — not another burden on their timetable.</p>
-        </div>
-        <div class="step reveal">
-          <div class="num">02</div>
-          <h3>Inspiring for students</h3>
-          <p>Impactful, first-hand testimonies bring democracy and freedom to life in ways textbooks cannot.</p>
-        </div>
-        <div class="step reveal">
-          <div class="num">03</div>
-          <h3>Lasting for society</h3>
-          <p>We build youth participation and democratic resilience that outlasts a single lesson.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- FOR SCHOOLS -->
-  <section id="schools" class="wrap">
+  <section id="schools" class="wrap sec-center">
     <div class="kicker">What we offer schools</div>
-    <h2>Powerful sessions, minimal workload</h2>
+    <h2>Powerful sessions for students, minimal workload for teachers</h2>
     <p class="lead">Once your school files an application, we arrange the visit with you — and handle most of the logistics.</p>
     <div class="offer-list">
       <div class="offer reveal">
         <h3>🕐 Flexible formats</h3>
         <p>45–60 minute classroom sessions or whole-school assemblies — whatever fits your timetable.</p>
       </div>
-      <div class="offer reveal">
-        <h3>📚 Curriculum-aligned</h3>
+      <div class="offer reveal featured">
+        <h3>📚 <strong>Curriculum-aligned</strong></h3>
         <p>Topics that align with Citizenship &amp; PSHE, Politics &amp; Global Studies, and other subjects.</p>
       </div>
       <div class="offer reveal">
@@ -335,7 +345,7 @@
 
   <!-- PILOT RESULTS -->
   <section id="results" class="wrap">
-    <div class="results" style="padding:56px 48px">
+    <div class="results sec-center" style="padding:56px 48px">
       <div class="kicker">Pilot project results · Autumn Term 2025</div>
       <h2 style="color:var(--cream)">A strong proof of concept</h2>
       <p class="lead">In our pilot phase we took real stories of democracy and freedom into schools — and measured what students took away.</p>
@@ -344,7 +354,7 @@
         <div class="stat"><div class="n">16</div><div class="l">sessions delivered</div></div>
         <div class="stat"><div class="n">6</div><div class="l">speakers trained</div></div>
         <div class="stat"><div class="n">1,300+</div><div class="l">students reached</div></div>
-        <div class="stat"><div class="n">630+</div><div class="l">feedback forms</div></div>
+        <div class="stat"><div class="n">610+</div><div class="l">feedback forms</div></div>
       </div>
       <div class="avg-score">
         <div class="big">4.3 / 5</div>
@@ -365,8 +375,47 @@
     </div>
   </section>
 
+  <!-- TESTIMONIES -->
+  <section id="voices" class="wrap fullbleed sec-center">
+    <div class="kicker">In their own words</div>
+    <h2>Testimonies from students and teachers</h2>
+    <p class="lead">Drawn from the 610+ feedback forms and conversations gathered during our pilot term.</p>
+    <div class="quotes">
+      <blockquote class="quote reveal">
+        <div class="mark">&ldquo;</div>
+        <p>Our pupils were receptive to Jihyun and were able to ask lots of questions at the end of her presentation. This was good to have the opportunity to do, as the pupils were more involved and able to delve deeper into some of the things that she had shared.</p>
+        <div class="who"><span class="src"><b>Teacher</b> · State school in Merseyside</span><span class="toggle"></span></div>
+      </blockquote>
+      <blockquote class="quote reveal">
+        <div class="mark">&ldquo;</div>
+        <p>Nathan&rsquo;s a great presenter, and there was so much that the students didn&rsquo;t know about the history and current situation in Hong Kong. It was an incredibly needed talk in today&rsquo;s climate of disinformation, misinformation, and the rise of populism threatening our own democracy.</p>
+        <div class="who"><span class="src"><b>Teacher</b> · Grammar school in Chesham</span><span class="toggle"></span></div>
+      </blockquote>
+      <blockquote class="quote reveal">
+        <div class="mark">&ldquo;</div>
+        <p>Jinhyuk was very open to sharing the hard parts about life, and was transparent about what defecting actually looked like, which helped students picture the reality of his situation.</p>
+        <div class="who"><span class="src"><b>Teacher</b> · International school in London</span><span class="toggle"></span></div>
+      </blockquote>
+      <blockquote class="quote reveal">
+        <div class="mark">&ldquo;</div>
+        <p>I have no idea a large quantity of people in today&rsquo;s society faced struggle like this.</p>
+        <div class="who"><span class="src"><b>Student</b> · State school in Enfield</span><span class="toggle"></span></div>
+      </blockquote>
+      <blockquote class="quote reveal">
+        <div class="mark">&ldquo;</div>
+        <p>Everything Jinhyuk said was fascinating, my favourite quote was &ldquo;human curiosity is stronger than fear&rdquo;.</p>
+        <div class="who"><span class="src"><b>Student</b> · International school in London</span><span class="toggle"></span></div>
+      </blockquote>
+      <blockquote class="quote reveal">
+        <div class="mark">&ldquo;</div>
+        <p>Jinhyuk&rsquo;s discussion on freedom and why he knows it to be worth protecting was clear and helpful in bringing his story back to the key ideas in politics that students study.</p>
+        <div class="who"><span class="src"><b>Teacher</b> · International school in London</span><span class="toggle"></span></div>
+      </blockquote>
+    </div>
+  </section>
+
   <!-- SESSIONS GALLERY -->
-  <section id="gallery" class="wrap">
+  <section id="gallery" class="wrap sec-center">
     <div class="kicker">In schools this term</div>
     <h2>Moments from our sessions</h2>
     <p class="lead">Real stories of democracy and freedom, brought into classrooms and assembly halls across the country.</p>
@@ -388,7 +437,7 @@
 
   <!-- SPEAKERS -->
   <section id="speakers" class="wrap">
-    <div class="panel-navy">
+    <div class="panel-navy sec-center">
       <div class="kicker">Speaker highlights</div>
       <h2>The voices behind the sessions</h2>
       <p class="lead">Our trained speakers share first-hand testimonies of life without freedoms. Click to read their profiles. The list is not exhaustive.</p>
@@ -406,6 +455,14 @@
             <span class="spk-proxy">S</span>
             <span class="spk-label"><b>Sai</b><span>Shan artist &amp; defender, Myanmar</span></span>
           </button>
+          <button class="spk-card" data-spk="simon">
+            <img src="photos/speaker-simon.jpg" alt="Simon Cheng" style="object-position:32% 28%" loading="lazy">
+            <span class="spk-label"><b>Simon Cheng</b><span>Hong Kong exiled activist</span></span>
+          </button>
+          <button class="spk-card" data-spk="jinhyuk">
+            <span class="spk-proxy">J</span>
+            <span class="spk-label"><b>Jinhyuk Li</b><span>North Korean defector</span></span>
+          </button>
           <button class="spk-card" data-spk="nathan" aria-hidden="true" tabindex="-1">
             <img src="photos/speaker-nathan.jpg" alt="" style="object-position:50% 22%" loading="lazy">
             <span class="spk-label"><b>Nathan Law</b><span>Hong Kong Democracy Activist</span></span>
@@ -417,6 +474,14 @@
           <button class="spk-card" data-spk="sai" aria-hidden="true" tabindex="-1">
             <span class="spk-proxy">S</span>
             <span class="spk-label"><b>Sai</b><span>Shan artist &amp; defender, Myanmar</span></span>
+          </button>
+          <button class="spk-card" data-spk="simon" aria-hidden="true" tabindex="-1">
+            <img src="photos/speaker-simon.jpg" alt="" style="object-position:32% 28%" loading="lazy">
+            <span class="spk-label"><b>Simon Cheng</b><span>Hong Kong exiled activist</span></span>
+          </button>
+          <button class="spk-card" data-spk="jinhyuk" aria-hidden="true" tabindex="-1">
+            <span class="spk-proxy">J</span>
+            <span class="spk-label"><b>Jinhyuk Li</b><span>North Korean defector</span></span>
           </button>
         </div>
       </div>
@@ -480,6 +545,25 @@
         'His work, censored by multiple regimes, confronts state violence and transnational repression through art and testimony. Since the February 2021 coup, Sai has fought relentlessly for recognition of his father\u2019s case after years of silence from international actors; the UN Working Group on Arbitrary Detention ultimately ruled his imprisonment as arbitrary.',
         'A nominee for the Index on Censorship Freedom of Expression Award, Sai\u2019s work connects memory, justice, and global solidarity.'
       ]
+    },
+    simon: {
+      name: 'Simon Cheng',
+      role: 'Hong Kong exiled pro-democracy activist',
+      photo: 'photos/speaker-simon.jpg',
+      pos: '32% 28%',
+      bio: [
+        'Simon is a Hong Kong exiled pro-democracy activist and founder of Hongkongers in Britain, a UK-wide diasporic non-profit headquartered in London. He studied political science, international relations, and European studies at National Taiwan University and the London School of Economics, and previously worked in trade and investment at the British Consulate General in Hong Kong.',
+        'Known for his unwavering advocacy of democracy, Simon was detained by Chinese authorities and remains targeted by Hong Kong\u2019s state security police under a HK$1 million bounty. Now a political refugee and British National (Overseas) citizen, he continues his activism in the UK.'
+      ]
+    },
+    jinhyuk: {
+      name: 'Jinhyuk Li',
+      role: 'North Korean defector',
+      proxy: 'J',
+      bio: [
+        'Jinhyuk Li is a North Korean defector who escaped the regime in 2012. Having endured extreme poverty, he sought refuge in the UK, looking for safety and the freedoms that he could not find in his birthplace.',
+        'After his departure, several of his relatives were taken by North Korean authorities without explanation or due process. He is now settled in the UK with his family, and has two young daughters that were born here.'
+      ]
     }
   };
 
@@ -532,9 +616,36 @@
   })();
 </script>
 
+<script>
+  (function(){
+    document.querySelectorAll('.quote, .factbox.collapsible').forEach(function(q){
+      q.setAttribute('role', 'button');
+      q.setAttribute('tabindex', '0');
+      q.setAttribute('aria-expanded', 'false');
+      function toggle(){
+        var open = q.classList.toggle('open');
+        q.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      q.addEventListener('click', toggle);
+      q.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
+    });
+  })();
+</script>
+
 <footer class="wrap">
   © 2026 Project Civic Square · civicsquareuk.com
 </footer>
 
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#FFF8EC"/>
+    <rect x="30" y="30" width="15" height="15" rx="4" fill="#001D3D"/>
+    <circle cx="37.5" cy="63" r="7.5" fill="#001D3D"/>
+    <circle cx="63" cy="63" r="7.5" fill="#001D3D"/>
+    <path d="M70 37 A7.5 7.5 0 1 0 62.5 44.5 L70 44.5 Z" fill="#FFB625"/>
+  </svg>
+</template>
 </body>
 </html>
