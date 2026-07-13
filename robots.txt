@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /civic-square-preview.html
+
+Sitemap: https://civicsquareuk.com/sitemap.xml
