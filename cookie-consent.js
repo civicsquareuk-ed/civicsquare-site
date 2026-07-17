@@ -2,7 +2,7 @@
  * Analytics load ONLY after explicit Accept (UK PECR / GDPR prior consent).
  * Swap MEASUREMENT_ID for your real GA4 ID (G-XXXXXXX). Until then GA is inert. */
 (function () {
-  var MEASUREMENT_ID = 'G-XXXXXXXXXX';   // <-- replace with your GA4 Measurement ID
+  var MEASUREMENT_ID = 'G-KGHK4EKE9X';   // <-- replace with your GA4 Measurement ID
   var KEY = 'cs-consent';                 // 'granted' | 'denied'
 
   var css = '\
@@ -26,7 +26,7 @@
     g.src = 'https://www.googletagmanager.com/gtag/js?id=' + MEASUREMENT_ID;
     document.head.appendChild(g);
     window.dataLayer = window.dataLayer || [];
-    function gtag(){ dataLayer.push(arguments); }
+    function gtag() { dataLayer.push(arguments); }
     window.gtag = gtag;
     gtag('js', new Date());
     gtag('config', MEASUREMENT_ID, { anonymize_ip: true });
@@ -53,14 +53,14 @@
   }
 
   function setConsent(v) {
-    try { localStorage.setItem(KEY, v); } catch (e) {}
+    try { localStorage.setItem(KEY, v); } catch (e) { }
     if (banner) banner.classList.remove('show');
     if (v === 'granted') loadGA();
   }
 
   function init() {
     var v;
-    try { v = localStorage.getItem(KEY); } catch (e) {}
+    try { v = localStorage.getItem(KEY); } catch (e) { }
     if (v === 'granted') { loadGA(); return; }
     if (v === 'denied') return;
     buildBanner().classList.add('show');
